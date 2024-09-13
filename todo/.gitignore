@@ -1,0 +1,12 @@
+# IntelliJ files
+.idea/
+
+# Build and dependency files
+target/
+*.jar
+*.war
+*.class
+
+# Logs and system files
+logs/
+*.log
