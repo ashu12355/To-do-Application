@@ -56,7 +56,7 @@ async function submitForm(event){
   return (
     <main>
       <div className="bg-white p-4 rounded-md shadow-lg w-96">
-        <h2 className="text-center text-xl">Todo App</h2>
+        <h2 className="text-center text-xl">Todo-App</h2>
         <section className="mt-4">
           <form onSubmit={submitForm} className="flex justify-between gap-2">
             <input type="text" name="title" placeholder="Add Text Here" />
