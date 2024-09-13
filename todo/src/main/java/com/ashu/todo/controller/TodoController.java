@@ -30,7 +30,7 @@ public class TodoController {
     public ResponseEntity<List<Todo>> getAllTodos() {
         List<Todo> todos = todoService.getAllTodos();
         // return new ResponseEntity<>(todos, HttpStatus.OK);
-        //or we can write
+        //or we can writ
         return ResponseEntity.ok(todos);
     }
 
