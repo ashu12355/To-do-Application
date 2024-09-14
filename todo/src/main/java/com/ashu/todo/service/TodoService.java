@@ -33,5 +33,11 @@ public class TodoService {
         }
         repository.deleteById(id);
     }
+    public Todo updateState(String id , boolean state){
+        Todo todo = repository.findById(id).orElseThrow();
+        todo.setCompleted(state);
+        repository.save(todo);
+        return todo;
+    }
 
 }

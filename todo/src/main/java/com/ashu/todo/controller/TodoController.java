@@ -30,7 +30,7 @@ public class TodoController {
     public ResponseEntity<List<Todo>> getAllTodos() {
         List<Todo> todos = todoService.getAllTodos();
         // return new ResponseEntity<>(todos, HttpStatus.OK);
-        //or we can writ
+        //or we can write
         return ResponseEntity.ok(todos);
     }
 
@@ -52,6 +52,16 @@ public class TodoController {
             todoService.deleteTodo(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch(IllegalArgumentException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @PatchMapping("/{id}/state/{state}")
+    public ResponseEntity<Todo> updateCompleted(@PathVariable String id,
+                                                @PathVariable boolean state){
+        try {
+            Todo todo = todoService.updateState(id,state);
+            return ResponseEntity.ok(todo);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
