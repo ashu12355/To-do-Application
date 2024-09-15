@@ -1,11 +1,12 @@
 import {updateTodoState} from "../service/TodoService"
-function Todos({todos}) {
+
+function Todos({todos,fetchTodos}) {
 
     async function completeStateChange(id,state){
        try {
         const response = await updateTodoState(id,state);
-        if(response.status ===200){
-            fetchTodo
+        if(response.status === 200){
+            fetchTodos();
             
         }
        } catch (error) {
@@ -17,7 +18,7 @@ function Todos({todos}) {
     return (
 
         <section className="mt-4 max-h-20 overflow-y-auto">
-        {todos.map((todo) => (
+        {todos.map(todo => (
           <div className="flex gap-4" key={todo.id}>
             <input 
             type="checkbox" 

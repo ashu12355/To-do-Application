@@ -30,7 +30,7 @@ function App() {
   }
 
   async function submitForm(event) {
-    setDisabled((state) => true);
+    setDisabled(state => true);
     event.preventDefault();
     const form = event.target;
     const inputs = form.elements;
@@ -42,8 +42,9 @@ function App() {
         obj[input.name] = input.value;
       }
     });
-    const json = JSON.stringify(obj); //convert javascript object in JSON
-    console.log(json);
+    
+    // const json = JSON.stringify(obj); //convert javascript object in JSON
+    // console.log(json);
 
     try {
       const response = await addTodo(obj);
@@ -72,8 +73,8 @@ function App() {
       setCopyTodos(allTodo.filter(todo => todo.completed))
     }
   }
-  return (
-    <main>
+  return ( 
+  <main>
       <div className="bg-white p-4 rounded-md shadow-lg w-96 ">
         <h2 className="text-center text-xl">Todo-App</h2>
 
@@ -81,7 +82,6 @@ function App() {
 
         <TodoMenu filterTodos={filterTodos} />
         <hr />
-
         <Todos todos={copyTodos} fetchTodos={fetchTodos} />
       </div>
     </main>

@@ -2,6 +2,7 @@ import { useState } from "react"
 
 function TodoMenu({filterTodos}) {
     const [selectedMenu,setSelectedMenu] = useState("ALL");
+
     return (
         <section className="mt-4 flex justify-between">
         <div className="flex gap-2 ">
