@@ -11,9 +11,13 @@ export function addTodo(payload) {
       'content-type':"application/json"
     }
    })
-
-  export function updateTodoState(id,state){
+  }  
+export function updateTodoState(id,state){
     const url = `${BASE_URL}/${id}/state/${state}`;
     return fetch(url ,{ method: "PATCH" });
-  }  
+ 
+}
+
+export function removeTodos() {
+ return fetch(BASE_URL+"/all", { method : "DELETE"})
 }

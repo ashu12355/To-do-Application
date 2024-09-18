@@ -1,7 +1,27 @@
 import { useState } from "react"
+import { removeTodos } from "../service/TodoService"
 
-function TodoMenu({filterTodos}) {
-    const [selectedMenu,setSelectedMenu] = useState("ALL");
+function TodoMenu({ filterTodos ,selectedMenu ,setSelectedMenu ,fetchTodos }) {
+  const [disabled,setDisabled] = useState(false);
+  const [clearBtnText , setClearBtnText] = useState('Clear all');
+
+
+async function onClearALL(event){
+  setDisabled(state => true);
+  setClearBtnText(state => "removing..")
+  try {
+    const response = await removeTodos();
+    if(response.status ==200 ){
+      fetchTodos();
+      setDisabled(state => false);
+      setClearBtnText(state => "clear all")
+    } else {
+      console.error("Something went wrong!")
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 
     return (
         <section className="mt-4 flex justify-between">
@@ -30,8 +50,13 @@ function TodoMenu({filterTodos}) {
           }}>Completed</button>
 
         </div>
-        <button className="px-2 bg-blue-500 text-white py-1 rounded">
-          Clear All
+        <button 
+        className="px-2 bg-blue-500 text-white py-1 rounded"
+        disabled = {disabled}
+        onClick={
+          onClearALL
+        }
+        >{clearBtnText}
         </button>
       </section>
     )

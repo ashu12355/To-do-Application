@@ -11,6 +11,7 @@ function App() {
   const [disabled, setDisabled] = useState(false);
   const [allTodo, setTodos] = useState([]);
   const [copyTodos, setCopyTodos] = useState([]);
+  const [selectedMenu, setSelectedMenu] = useState("ALL");
 
   useEffect(() => {
     
@@ -22,11 +23,10 @@ function App() {
       const todos = await response.json();
       setTodos(todos);
       setCopyTodos(todos);
+      setSelectedMenu("ALL");
     } catch (error) {
-      console.log(error);
-      
+      console.log(error);  
     }
-    
   }
 
   async function submitForm(event) {
@@ -51,7 +51,7 @@ function App() {
 
       if (response.status === 201) {
         const data = await response.json();
-        setTodos([data, ...allTodo]);
+        fetchTodos();
         form.reset();
       } else {
         console.error(response.status);
@@ -65,7 +65,7 @@ function App() {
 
   function filterTodos(state) {
     if(state == "ALL"){
-      setCopyTodos(addTodo);
+      setCopyTodos(allTodo);
     }
     else if(state === "PENDING"){
       setCopyTodos(allTodo.filter(todo => !todo.completed))
@@ -80,7 +80,7 @@ function App() {
 
         <AddTodo onSubmit={submitForm} disabled={disabled} />
 
-        <TodoMenu filterTodos={filterTodos} />
+        <TodoMenu filterTodos={filterTodos} selectedMenu = {selectedMenu} setSelectedMenu = {setSelectedMenu} fetchTodos={fetchTodos}/>
         <hr />
         <Todos todos={copyTodos} fetchTodos={fetchTodos} />
       </div>
